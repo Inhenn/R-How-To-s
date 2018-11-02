@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R How To&#x27;s</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="r-how-tos">R How To’s</h1>
+<p>All content was derived from personal experience, and R documentation of the packages used.</p>
+<h2 id="table-of-contents">Table of contents</h2>
+<ol>
+<li><a href="#r-syntax">R Syntax</a>
+<ol>
+<li><a href="#how-to-write-a-for-loop">How to write a for loop?</a></li>
+<li><a href="#how-to-force-a-side-effect">How to force a side effect?</a></li>
+</ol>
+</li>
+<li><a href="#lists">Lists</a>
+<ol>
+<li><a href="#how-to-create-a-list-of-repeated-values">How to create a list of repeated values?</a></li>
+<li><a href="#how-to-create-a-linearly-spaced-list">How to create a linearly spaced list?</a></li>
+</ol>
+</li>
+<li><a href="#strings">Strings</a>
+<ol>
+<li><a href="#how-to-get-the-substring-before-a-particular-separator">How to get the substring before a particular separator ?</a></li>
+</ol>
+</li>
+<li><a href="#explore-dataframes">Explore dataframes</a>
+<ol>
+<li><a href="#how-to-get-the-index-of-a-row-that-has-a-value-on-an-injective-column">How to get the index of a row that has a value on an injective column?</a></li>
+<li><a href="#how-to-get-the-column-names">How to get the column names?</a></li>
+<li><a href="#how-to-get-the-number-of-rows">How to get the number of rows?</a></li>
+</ol>
+</li>
+<li><a href="#edit-dataframes">Edit dataframes</a>
+<ol>
+<li><a href="#how-to-split-a-character-column-into-two-separate-columns-with-separator-in-a-data-frame">How to split a character column into two separate columns with separator ‘sep’ in a data frame?</a></li>
+<li><a href="#how-to-delete-a-column-in-a-dataframe">How to delete a column in a dataframe?</a></li>
+<li><a href="#how-to-cast-a-character-column-to-a-numeric-one">How to cast a character column to a numeric one?</a></li>
+<li><a href="#how-to-filter-the-data">How to filter the data?</a></li>
+<li><a href="#how-to-cast-a-variable-to-a-factor">How to cast a variable to a factor?</a></li>
+<li><a href="#how-to-coerce-a-dataframe-to-a-tibble">How to coerce a dataframe to a tibble?</a></li>
+<li><a href="#how-to-replace-a-value-in-all-columns-of-a-dataframe-by-another">How to replace a value in all columns of a dataframe by another?</a></li>
+<li><a href="#how-to-create-a-count-dataframe-counting-the-frequency-of-combinations-of-categorical-variables">How to create a count dataframe counting the frequency of combinations of categorical variables?</a></li>
+<li><a href="#how-to-copy-a-dataframe">How to copy a dataframe?</a></li>
+<li><a href="#how-to-apply-a-custom-function-to-change-values-in-a-column">How to apply a custom function to change values in a column?</a></li>
+<li><a href="#how-to-change-the-order-of-levels-in-a-factor-column">How to change the order of levels in a factor column?</a></li>
+<li><a href="#how-to-create-a-tibble?">How to create a tibble?</a></li>
+<li><a href="#how-to-create-a-tibble-from-columns-of-an-existing-tibble">How to create a tibble from columns of an existing tibble?</a></li>
+<li><a href="#how-to-sort-a-dataframe-on-one-column">How to sort a dataframe on one column?</a></li>
+</ol>
+</li>
+<li><a href="#plotting-data">Plotting data</a>
+<ol>
+<li><a href="#how-to-plot-a-histogram">How to plot a histogram?</a></li>
+<li><a href="#how-to-facet-a-histogram-on-two-variables">How to facet a histogram on two variables?</a></li>
+<li><a href="#how-to-plot-a-cumulative-frequency-histogram">How to plot a cumulative frequency histogram?</a></li>
+<li><a href="#how-to-manually-set-bins-in-a-histogram">How to manually set bins in a histogram?</a></li>
+<li><a href="#how-to-change-the-binwidth-of-a-histogram-interactively">How to change the binwidth of a histogram interactively?</a></li>
+<li><a href="#how-to-make-a-scatterplot">How to make a scatterplot?</a></li>
+<li><a href="#how-to-plot-a-bar-chart">How to plot a bar chart?</a></li>
+<li><a href="#how-to-make-a-scatterplot-matrix">How to make a scatterplot matrix?</a></li>
+<li><a href="#how-to-plot-a-vertical-line">How to plot a vertical line?</a></li>
+<li><a href="#how-to-add-a-density-curve-to-a-histogram">How to add a density curve to a histogram?</a></li>
+<li><a href="#how-to-make-a-boxplot">How to make a boxplot?</a></li>
+<li><a href="#how-to-make-a-variable-width-boxplot">How to make a variable width boxplot?</a></li>
+<li><a href="#how-to-add-a-density-to-a-scatterplot">How to add a density to a scatterplot?</a></li>
+<li><a href="#how-to-add-a-smooth-to-a-scatterplot">How to add a smooth to a scatterplot?</a></li>
+<li><a href="#how-to-plot-a-line">How to plot a line?</a></li>
+<li><a href="#%EF%BB%BF%EF%BB%BFhow-to-make-a-parallel-coordinate-plot">How to make a parallel coordinate plot?</a></li>
+<li><a href="#how-to-add-alpha-blending-to-a-pcp">How to add alpha-blending to a pcp?</a></li>
+<li><a href="#how-to-group-on-a-pcp">How to group on a pcp?</a></li>
+<li><a href="#how-to-remove-labels-and-variable-names-on-the-y-axis">How to remove labels and variable names on the y-axis?</a></li>
+<li><a href="#how-to-plot-a-bar-chart-with-count-column">How to plot a bar chart with count column?</a></li>
+<li><a href="#how-to-make-a-mosaicplot">How to make a mosaicplot?</a></li>
+<li><a href="#how-to-see-how-a-particular-value-of-a-dependent-variable-is-found-across-other-categorical-variables">How to see how a particular value of a dependent variable is found across other categorical variables?</a></li>
+<li><a href="#how-to-set-the-x-axis-ticks-for-a-continuous-variable">How to set the x-axis ticks for a continuous variable?</a></li>
+</ol>
+</li>
+<li><a href="#modeling">Modeling</a>
+<ol>
+<li><a href="#how-to-fit-a-linear-model">How to fit a linear model?</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="r-syntax">R Syntax</h2>
+<h4 id="how-to-write-a-for-loop">How to write a for loop?</h4>
+<pre><code>for (i in 2010:2015){
+ 
+}
+</code></pre>
+<h4 id="how-to-force-a-side-effect">How to force a side effect?</h4>
+<p><code>global_var &lt;&lt;- new_value</code></p>
+<h2 id="lists">Lists</h2>
+<h4 id="how-to-create-a-list-of-repeated-values">How to create a list of repeated values?</h4>
+<p><code>rep(values, each = n)</code></p>
+<h4 id="how-to-create-a-linearly-spaced-list">How to create a linearly spaced list?</h4>
+<p><code>seq(a, b, c)</code><br>
+will be <code>c(a, a + c, a + 2c...)</code></p>
+<h2 id="strings">Strings</h2>
+<h4 id="how-to-get-the-substring-before-a-particular-separator">How to get the substring before a particular separator?</h4>
+<p>Using <code>stringr</code><br>
+<code>word(string, sep = “sepa”)</code></p>
+<h2 id="explore-dataframes">Explore dataframes</h2>
+<h4 id="how-to-get-the-index-of-a-row-that-has-a-value-on-an-injective-column">How to get the index of a row that has a value on an injective column?</h4>
+<p><code>df[which(df$col == value), ]</code></p>
+<h4 id="how-to-get-the-column-names">How to get the column names?</h4>
+<p><code>colnames(df)</code></p>
+<h4 id="how-to-get-the-number-of-rows">How to get the number of rows?</h4>
+<p><code>nrow(df)</code></p>
+<h2 id="edit-dataframes">Edit dataframes</h2>
+<h4 id="how-to-split-a-character-column-into-two-separate-columns-with-separator-in-a-data-frame">How to split a character column into two separate columns with separator in a data frame?</h4>
+<p>Using <code>tidyr</code><br>
+<code>separate(data, col, into, sep = "", remove = TRUE)</code></p>
+<h4 id="how-to-delete-a-column-in-a-dataframe">How to delete a column in a dataframe?</h4>
+<p>Using <code>dyplr</code><br>
+<code>data %&gt;% select (-c(col1, col2))</code></p>
+<h4 id="how-to-cast-a-character-column-to-a-numeric-one">How to cast a character column to a numeric one?</h4>
+<p><code>data$col &lt;- as.numeric(data$col)</code></p>
+<h4 id="how-to-filter-the-data">How to filter the data?</h4>
+<p><code>filter(data, var &gt; threshold)</code><br>
+or</p>
+<pre><code>library(dplyr)
+df &lt;- df %&lt;% filter(condition1, condition2,..)
+</code></pre>
+<h4 id="how-to-cast-a-variable-to-a-factor">How to cast a variable to a factor?</h4>
+<p><code>factor(data)</code></p>
+<h4 id="how-to-coerce-a-dataframe-to-a-tibble">How to coerce a dataframe to a tibble?</h4>
+<p><code>df &lt;- as_tibble(df)</code></p>
+<h4 id="how-to-replace-a-value-in-all-columns-of-a-dataframe-by-another">How to replace a value in all columns of a dataframe by another?</h4>
+<p><code>df[df == value] &lt;- new_value</code></p>
+<h4 id="how-to-create-a-count-dataframe-counting-the-frequency-of-combinations-of-categorical-variables">How to create a count dataframe counting the frequency of combinations of categorical variables?</h4>
+<p><code>counts &lt;- as_tibble(data)[, categorical_vars] %&gt;% group_by(categorical_vars) %&gt;% summarize(Freq = n())</code></p>
+<h4 id="how-to-copy-a-dataframe">How to copy a dataframe?</h4>
+<p><code>data.frame(df)</code></p>
+<h4 id="how-to-apply-a-custom-function-to-change-values-in-a-column">How to apply a custom function to change values in a column?</h4>
+<pre><code>f &lt;- function(x) {...}
+df$col &lt;- sapply(df$col, f)
+</code></pre>
+<h4 id="how-to-change-the-order-of-levels-in-a-factor-column">How to change the order of levels in a factor column?</h4>
+<p><code>x = factor(x, levels(x)[c(4,5,1:3)])</code></p>
+<h4 id="how-to-create-a-tibble">How to create a tibble?</h4>
+<pre><code>library(tibble)
+tibble(x = 1:4, y = col)
+</code></pre>
+<h4 id="how-to-create-a-tibble-from-columns-of-an-existing-tibble">How to create a tibble from columns of an existing tibble?</h4>
+<p><code>bind_cols(t[,1],t[,3])</code></p>
+<h4 id="how-to-sort-a-dataframe-on-one-column">How to sort a dataframe on one column?</h4>
+<pre><code>library(dplyr)
+df &lt;- df %&gt;% arrange(desc(col_name))
+</code></pre>
+<h4 id="how-to-create-a-column-from-other-columns">How to create a column from other columns?</h4>
+<pre><code>library(dplyr)
+df &lt;- df %&gt;% mutate(new_col = f(existing_cols))
+</code></pre>
+<h2 id="plotting-data">Plotting data</h2>
+<p>Using <code>tidyverse</code></p>
+<h4 id="how-to-plot-a-histogram">How to plot a histogram?</h4>
+<p><code>ggplot(data, aes(x = numerical_var, fill = categorical_var)) + xlim(lim_inf, lim_sup) + geom_histogram(binwidth = bin_width, fill = "mediumpurple", center = center_value_for_one_of_the_bins) + xlab("labelx") + facet_wrap(~categorical_var2, ncol = 1) + ylab("")</code></p>
+<h4 id="how-to-facet-a-histogram-on-two-variables">How to facet a histogram on two variables?</h4>
+<p><code>ggplot(data, aes(numerical_var)) + geom_histogram() + facet_grid(categorical_var1 ~ categorical_var2)</code></p>
+<h4 id="how-to-plot-a-cumulative-frequency-histogram">How to plot a cumulative frequency histogram?</h4>
+<p><code>ggplot(df, aes(x = numerical_var)) + geom_histogram(aes(y = cumsun(..count..)), color = "blue", fill = "lighblue")</code><br>
+where <code>color</code> is the color of the edges of the rectangles and <code>fill</code> is the color filling the columns</p>
+<h4 id="how-to-manually-set-bins-in-a-histogram">How to manually set bins in a histogram?</h4>
+<p><code>geom_histogram(breaks = seq(30,110,10))</code></p>
+<h4 id="how-to-change-the-binwidth-of-a-histogram-interactively">How to change the binwidth of a histogram interactively?</h4>
+<pre><code>library(tidyverse)
+library(ggvis)
+df %&gt;% ggvis(~numerical_var) %&gt;% 
+	layer_histograms(fill := "lightblue",
+			 width = input_slider(0.1, 2, value = .1, step = .1, label = "width"),
+			 center = input_slider(min, max, value = starting_value, step = step, label = "center"))
+</code></pre>
+<h4 id="how-to-make-a-scatterplot">How to make a scatterplot?</h4>
+<p><code>ggplot(data, aes(numerical_var1, numerical_var2, color = categorical_var)) + geom_point() + theme(legend.position = "bottom") + scale_colour_colorblind()</code></p>
+<h4 id="how-to-plot-a-bar-chart">How to plot a bar chart?</h4>
+<p><code>ggplot(data, aes(categorical_var)) + geom_bar(aes(weight = Freq))</code></p>
+<h4 id="how-to-make-a-scatterplot-matrix">How to make a scatterplot matrix?</h4>
+<pre><code>library(GGally)
+ggpairs(data, title = "title", diag = list(continuous = 'density'), axisLabels = 'show')
+</code></pre>
+<p>or <code>axisLabels = 'none'</code></p>
+<h4 id="how-to-plot-a-vertical-line">How to plot a vertical line?</h4>
+<p><code>ggplot(data, aes(x)) + geom_vline(xintercept = median(data$x), col = "red")</code></p>
+<h4 id="how-to-add-a-density-curve-to-a-histogram">How to add a density curve to a histogram?</h4>
+<p><code>ggplot(data, aes(numerical_var)) + geom_histogram(aes(y = ..density..)) + geom_density() + ggtitle("title")</code></p>
+<h4 id="how-to-make-a-boxplot">How to make a boxplot?</h4>
+<p><code>ggplot(data, aes("var", numerical_var)) + geom_boxplot() + scale_x_discrete(breaks = NULL) + coord_flip()</code><br>
+where <code>"var"</code> is a dummy variable</p>
+<h4 id="how-to-make-a-variable-width-boxplot">How to make a variable width boxplot?</h4>
+<p><code>ggplot(data, aes(categorical_var, numerical_var)) + geom_boxplot(varwidth = TRUE)</code></p>
+<h4 id="how-to-add-a-density-to-a-scatterplot">How to add a density to a scatterplot?</h4>
+<p><code>ggplot(data, aes(x, y)) + geom_point() + geom_density2d()</code></p>
+<h4 id="how-to-add-a-smooth-to-a-scatterplot">How to add a smooth to a scatterplot?</h4>
+<p><code>ggplot(data, aes(x, y)) + geom_point() + geom_smooth(colour = "green")</code></p>
+<h4 id="how-to-plot-a-line">How to plot a line?</h4>
+<p><code>geom_abline(slope = 1, intercept = 0)</code></p>
+<h4 id="how-to-make-a-parallel-coordinate-plot">How to make a parallel coordinate plot?</h4>
+<p><code>ggparcoord(data = d, columns = c(1:3), scale = "uniminmax")</code></p>
+<p>or <code>scale = "globalminmax"</code></p>
+<h4 id="how-to-add-alpha-blending-to-a-pcp">How to add alpha-blending to a pcp?</h4>
+<p><code>ggparcoord(data = d, columns = c(1:3), scale = "uniminmax", alphaLines = 0.2)</code></p>
+<h4 id="how-to-group-on-a-pcp">How to group on a pcp?</h4>
+<p><code>ggparcoord(data = d[order(d$var1),], columns = c(1:3,6), groupColumn = "var1", scale = "uniminmax") + theme(legend.position = "none")</code></p>
+<h4 id="how-to-remove-labels-and-variable-names-on-the-y-axis">How to remove labels and variable names on the y-axis?</h4>
+<p><code>... + theme(axis.ticks.y = element_blank(), axis.text.y = element_blank())</code></p>
+<h4 id="how-to-plot-a-bar-chart-with-count-column">How to plot a bar chart with count column?</h4>
+<p><code>geom_bar()</code> makes the height of the bar proportional to the number of cases in each group while with <code>geom_col()</code> the heights of the bars represents values in the data</p>
+<p><code>ggplot(data, aes(categories_names, count_column)) + geom_col()</code></p>
+<p>Another way to do it is:<br>
+<code>ggplot(data, aes(x = categories_names, y = count_column)) + geom_bar(stat = "identity")</code></p>
+<h4 id="how-to-make-a-mosaicplot">How to make a mosaicplot?</h4>
+<pre><code>library(vcd)
+mosaic(dependent_var ~ categorical_var1 + categorical_var2, data = df, direction = c("v", "v", "h"))
+</code></pre>
+<p>where <code>direction</code> is the succession of cuts, either <code>v</code> (vertical) or <code>h</code> (horizontal)</p>
+<h4 id="how-to-see-how-a-particular-value-of-a-dependent-variable-is-found-across-other-categorical-variables">How to see how a particular value of a dependent variable is found across other categorical variables?</h4>
+<p>Make a mosaic plot and fill the values you don’t care for in the same color:</p>
+<pre><code>library(vc)
+library(grid)
+mosaic(dependent_var ~ categorical_var1 + categorical_var2, data = df, direction = c("v", "v", "h"), gp = gpar(fill = c("grey", "grey", "grey", "red", "grey")))
+</code></pre>
+<p>where we are interested in the 4th value of <code>dependent_var</code></p>
+<h4 id="how-to-set-the-x-axis-ticks-for-a-continuous-variable">How to set the x-axis ticks for a continuous variable?</h4>
+<p><code>ggplot(df, aes(x = numerical_var)) + ... + scale_x_continuous(breaks = seq(30,60,10))</code><br>
+Here ticks will be at <code>40, 50, 60</code></p>
+<h2 id="modeling">Modeling</h2>
+<h4 id="how-to-fit-a-linear-model">How to fit a linear model?</h4>
+<p><code>lm(formula, data)</code></p>
+</div>
+</body>
+
+</html>
